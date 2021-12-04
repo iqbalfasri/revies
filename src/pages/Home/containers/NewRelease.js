@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Link} from "react-router-dom";
 import { Box, Stack, Text, Flex } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Card } from "../../../components";
@@ -38,12 +39,13 @@ export default function NewRelease() {
           data.results
             .slice(0, 4)
             .map((movie) => (
-              <Card
-                key={movie.id}
-                title={movie.original_title}
-                tagLabel="Action"
-                imgUrl={getImageSource(movie.poster_path)}
-              />
+              <Link key={movie.id} to={`/movie/${movie.id}`}>
+                <Card
+                  title={movie.original_title}
+                  tagLabel="Action"
+                  imgUrl={getImageSource(movie.poster_path)}
+                />
+              </Link>
             ))}
       </Stack>
     </Box>

@@ -21,6 +21,7 @@ const theme = extendTheme({
       blue: "#0FEFFD",
       blue018: "rgba(15, 239, 253, 0.1)",
       yellow: "#FFE922",
+      yellow01: "rgba(255, 233, 34, 0.1)"
     },
   },
   config: {

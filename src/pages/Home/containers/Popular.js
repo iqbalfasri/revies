@@ -4,6 +4,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Card } from "../../../components";
 import { useGetMoviePopular } from "../../../api/hooks";
 import { getImageSource } from "../../../utils";
+import { Link } from "react-router-dom";
 
 export default function Popular() {
   const { data, isLoading, isError } = useGetMoviePopular();
@@ -35,16 +36,15 @@ export default function Popular() {
       >
         {!isLoading &&
           !isError &&
-          data.results
-            .slice(0, 4)
-            .map((movie) => (
+          data.results.slice(0, 4).map((movie) => (
+            <Link key={movie.id} to={`/movie/${movie.id}`}>
               <Card
-                key={movie.id}
                 title={movie.original_title}
                 tagLabel="Action"
                 imgUrl={getImageSource(movie.poster_path)}
               />
-            ))}
+            </Link>
+          ))}
       </Stack>
     </Box>
   );
