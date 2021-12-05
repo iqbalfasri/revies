@@ -4,6 +4,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Card } from "../../../components";
 import { useGetTvPopular } from "../../../api/hooks";
 import { getImageSource } from "../../../utils";
+import { Link } from "react-router-dom";
 
 export default function TVShows() {
   const { data, isLoading, isError } = useGetTvPopular();
@@ -15,16 +16,18 @@ export default function TVShows() {
           TV Show
         </Text>
 
-        <Box
-          display="flex"
-          as="span"
-          color="brand.yellow"
-          fontWeight={500}
-          sx={{ cursor: "pointer" }}
-        >
-          See All
-          <ChevronRightIcon color="brand.yellow" w={6} h={6} />
-        </Box>
+        <Link to="/movies/tv">
+          <Box
+            display="flex"
+            as="span"
+            color="brand.yellow"
+            fontWeight={500}
+            sx={{ cursor: "pointer" }}
+          >
+            See All
+            <ChevronRightIcon color="brand.yellow" w={6} h={6} />
+          </Box>
+        </Link>
       </Flex>
       <Stack
         shouldWrapChildren
@@ -35,16 +38,15 @@ export default function TVShows() {
       >
         {!isLoading &&
           !isError &&
-          data.results
-            .slice(0, 4)
-            .map((movie) => (
+          data.pages[0].results.slice(0, 4).map((movie) => (
+            <Link key={movie.id} to={`/tv/${movie.id}`}>
               <Card
-                key={movie.id}
+                voteAverage={movie.vote_average}
                 title={movie.original_name}
-                tagLabel="Action"
                 imgUrl={getImageSource(movie.poster_path)}
               />
-            ))}
+            </Link>
+          ))}
       </Stack>
     </Box>
   );

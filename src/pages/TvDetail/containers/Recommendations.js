@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Card } from "../../../components";
 import { getImageSource } from "../../../utils";
 import { Box, Text, Stack } from "@chakra-ui/react";
-import { useGetMovieRecommendations } from "../../../api/hooks";
+import { useGeTvRecommendation } from "../../../api/hooks";
 
-export default function MovieRecommendations({ movieId }) {
-  const { data, isLoading, isError } = useGetMovieRecommendations({
-    movie_id: movieId,
+export default function MovieRecommendations({ tvId }) {
+  const { data, isLoading, isError } = useGeTvRecommendation({
+    tv_id: tvId,
   });
 
   if (isLoading) {
@@ -15,7 +15,7 @@ export default function MovieRecommendations({ movieId }) {
   }
 
   return (
-    <Box>
+    <Box pt={14}>
       <Text mb={6} fontSize="32px" fontWeight="bold" lineHeight="32px">
         You Might Also Like This!
       </Text>
@@ -24,10 +24,10 @@ export default function MovieRecommendations({ movieId }) {
         {!isLoading &&
           !isError &&
           data.results.slice(0, 4).map((movie) => (
-            <Link key={movie.id} to={`/movie/${movie.id}`}>
+            <Link key={movie.id} to={`/tv/${movie.id}`}>
               <Card
+                title={movie.original_name}
                 voteAverage={movie.vote_average}
-                title={movie.original_title}
                 imgUrl={getImageSource(movie.poster_path)}
               />
             </Link>

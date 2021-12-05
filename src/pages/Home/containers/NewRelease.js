@@ -42,8 +42,8 @@ export default function NewRelease() {
           data.pages[0].results.slice(0, 4).map((movie) => (
             <Link key={movie.id} to={`/movie/${movie.id}`}>
               <Card
+                voteAverage={movie.vote_average}
                 title={movie.original_title}
-                tagLabel="Action"
                 imgUrl={getImageSource(movie.poster_path)}
               />
             </Link>

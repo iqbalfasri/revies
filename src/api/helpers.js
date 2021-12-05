@@ -11,6 +11,7 @@ export const API = () => {
     baseURL: API_BASE_URL,
     params: {
       api_key: API_KEY,
+      region: "ID",
     },
     timeout: 60000, // 1 menute to cancel request
     headers: requestHeaders,

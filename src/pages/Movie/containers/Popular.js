@@ -4,14 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { Wrap, Text, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useGetMoviePopular } from "../../../api/hooks";
-import { Card } from "../../../components";
+import { Card, LoadMore } from "../../../components";
 import { getImageSource } from "../../../utils";
 
 export default function MoviePopular() {
   const navigate = useNavigate();
 
-  const { data, isLoading, isSuccess, hasNextPage, fetchNextPage } =
-    useGetMoviePopular();
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGetMoviePopular();
 
   return (
     <React.Fragment>
@@ -39,8 +45,8 @@ export default function MoviePopular() {
                 {page.results.map((movie) => (
                   <Link key={movie.id} to={`/movie/${movie.id}`}>
                     <Card
+                      voteAverage={movie.vote_average}
                       title={movie.original_title}
-                      tagLabel="Action"
                       imgUrl={getImageSource(movie.poster_path)}
                     />
                   </Link>
@@ -48,6 +54,8 @@ export default function MoviePopular() {
               </Wrap>
             ))}
         </InfiniteScroll>
+
+        {isFetchingNextPage ? <LoadMore /> : null}
       </Box>
     </React.Fragment>
   );

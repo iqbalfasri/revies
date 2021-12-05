@@ -3,11 +3,11 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Link, useNavigate } from "react-router-dom";
 import { Wrap, Text, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { useGetMovieNowPlaying } from "../../../api/hooks";
+import { useGetTvPopular } from "../../../api/hooks";
 import { Card, LoadMore } from "../../../components";
 import { getImageSource } from "../../../utils";
 
-export default function MovieNowPlaying() {
+export default function Tv() {
   const navigate = useNavigate();
 
   const {
@@ -17,7 +17,7 @@ export default function MovieNowPlaying() {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useGetMovieNowPlaying();
+  } = useGetTvPopular();
 
   return (
     <React.Fragment>
@@ -33,7 +33,7 @@ export default function MovieNowPlaying() {
           cursor: "pointer",
         }}
       >
-        <ArrowBackIcon w={12} h={12} color="brand.yellow" mr={2} /> Now Playing
+        <ArrowBackIcon w={12} h={12} color="brand.yellow" mr={2} /> TV Popular
       </Text>
 
       <Box my={14}>
@@ -43,10 +43,10 @@ export default function MovieNowPlaying() {
             data.pages.map((page, index) => (
               <Wrap key={index} shouldWrapChildren spacing="24px">
                 {page.results.map((movie) => (
-                  <Link key={movie.id} to={`/movie/${movie.id}`}>
+                  <Link key={movie.id} to={`/tv/${movie.id}`}>
                     <Card
                       voteAverage={movie.vote_average}
-                      title={movie.original_title}
+                      title={movie.original_name}
                       imgUrl={getImageSource(movie.poster_path)}
                     />
                   </Link>

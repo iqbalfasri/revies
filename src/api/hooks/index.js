@@ -4,3 +4,6 @@ export { default as useGetTvPopular } from "./useGetTvPopular";
 export { default as useGetMovieDetail } from "./useGetMovieDetail";
 export { default as useGetCast } from "./useGetCast";
 export { default as useGetMovieRecommendations } from "./useGetMovieRecommendations";
+export { default as useGetTvDetail } from "./useGetTvDetail";
+export { default as useGetTvSeason } from "./useGetTvSeason";
+export { default as useGeTvRecommendation } from "./useGeTvRecommendation";

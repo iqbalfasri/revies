@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 
 import MovieNowPlaying from "./containers/NowPlaying";
 import MoviePopular from "./containers/Popular";
+import Tv from "./containers/Tv";
 
 export default function Movie() {
   const params = useParams();
@@ -19,6 +20,8 @@ export default function Movie() {
           <MovieNowPlaying />
         ) : params.category === "popular" ? (
           <MoviePopular />
+        ) : params.category === "tv" ? (
+          <Tv />
         ) : null}
       </Container>
     </Box>
