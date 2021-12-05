@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Link, useNavigate } from "react-router-dom";
 import { Wrap, Text, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { useGetMovieNowPlaying } from "../../../api/hooks";
+import { useGetMoviePopular } from "../../../api/hooks";
 import { Card } from "../../../components";
 import { getImageSource } from "../../../utils";
 
@@ -11,7 +11,7 @@ export default function MoviePopular() {
   const navigate = useNavigate();
 
   const { data, isLoading, isSuccess, hasNextPage, fetchNextPage } =
-    useGetMovieNowPlaying();
+    useGetMoviePopular();
 
   return (
     <React.Fragment>

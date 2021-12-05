@@ -38,7 +38,7 @@ export default function Popular() {
       >
         {!isLoading &&
           !isError &&
-          data.results.slice(0, 4).map((movie) => (
+          data.pages[0].results.slice(0, 4).map((movie) => (
             <Link key={movie.id} to={`/movie/${movie.id}`}>
               <Card
                 title={movie.original_title}

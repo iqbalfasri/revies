@@ -1,13 +1,19 @@
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { API } from "../helpers";
 
-async function getMoviePopular() {
+async function getMoviePopular({ pageParam = 1 }) {
   const { request } = API();
-  const { data } = await request.get("movie/popular");
+  const { data } = await request.get(`movie/popular?page=${pageParam}`);
 
   return data;
 }
 
 export default function useGetMoviePopular() {
-  return useQuery("moviePopular", getMoviePopular);
+  return useInfiniteQuery("moviePopular", getMoviePopular, {
+    getNextPageParam: (lastPage) => {
+      return lastPage.page === lastPage.total_pages
+        ? undefined
+        : lastPage.page + 1;
+    },
+  });
 }
