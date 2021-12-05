@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components";
-import { HomePage, MovieDetail } from "./pages";
+import { HomePage, MovieDetail, Movie } from "./pages";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/movies/:category" element={<Movie />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
       </Routes>
     </>

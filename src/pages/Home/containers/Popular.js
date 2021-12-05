@@ -16,16 +16,18 @@ export default function Popular() {
           Popular
         </Text>
 
-        <Box
-          display="flex"
-          as="span"
-          color="brand.yellow"
-          fontWeight={500}
-          sx={{ cursor: "pointer" }}
-        >
-          See All
-          <ChevronRightIcon color="brand.yellow" w={6} h={6} />
-        </Box>
+        <Link to="/movies/popular">
+          <Box
+            display="flex"
+            as="span"
+            color="brand.yellow"
+            fontWeight={500}
+            sx={{ cursor: "pointer" }}
+          >
+            See All
+            <ChevronRightIcon color="brand.yellow" w={6} h={6} />
+          </Box>
+        </Link>
       </Flex>
       <Stack
         shouldWrapChildren

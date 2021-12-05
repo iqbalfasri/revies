@@ -2,11 +2,7 @@ import * as React from "react";
 import { format } from "date-fns";
 import { Box, Container, Flex, Text, Stack } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
-import {
-  useGetCast,
-  useGetMovieDetail,
-  useGetMovieRecommendations,
-} from "../../api/hooks";
+import { useGetMovieDetail } from "../../api/hooks";
 import { useParams } from "react-router-dom";
 import { Card } from "../../components";
 import { getImageSource } from "../../utils";
@@ -17,17 +13,14 @@ import MovieCast from "./containers/Cast";
 export default function MovieDetail() {
   const params = useParams();
 
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   // detail movie
   const { data, isLoading, isError } = useGetMovieDetail({
     movie_id: params?.id,
   });
-
-  // get recommendations moives
-  const {
-    data: recommendations,
-    isLoading: recommendationsLoading,
-    isError: recommendationsIsError,
-  } = useGetMovieRecommendations({ movie_id: params?.id });
 
   if (isLoading) {
     return null;
@@ -36,8 +29,6 @@ export default function MovieDetail() {
   if (isError) {
     return <Text>Error!</Text>;
   }
-
-  console.log(recommendations, "recom");
 
   return (
     <Box py={40}>
